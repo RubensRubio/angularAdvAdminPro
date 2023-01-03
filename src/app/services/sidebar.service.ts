@@ -15,6 +15,8 @@ menu : any[]= [
       {titulo : 'Graficas', url: 'grafica1'},
       {titulo : 'Promesas', url: 'promises'},
       {titulo : 'RXJS', url: 'rxjs'},
+      {titulo : 'Perfiles', url: 'perfil'},
+
 
 
     ]

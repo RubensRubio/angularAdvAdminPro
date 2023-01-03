@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 
 import { LoginForm } from '../interfaces/login-form.interfaces';
 import { RegisterForm } from '../interfaces/register-form.interfaces';
+import { Usuario } from '../models/usuario.models';
 
 declare const google: any;
 const base_url = environment.base_url;
@@ -17,22 +18,35 @@ const base_url = environment.base_url;
 })
 export class UsuarioService {
 
+  public usuario!: Usuario;
+
+
   constructor(private httpclient: HttpClient,
     private router: Router) { }
 
-  validarToken(): Observable<boolean> {
+  get token(): string {
+    return localStorage.getItem('token') || '';
+  }
 
-    const token = localStorage.getItem('token') || '';
+  get uid(): string {
+    return this.usuario.uid || '';
+  }
+
+  validarToken(): Observable<boolean> {
 
     return this.httpclient.get(`${base_url}/login/renew`, {
       headers: {
-        'x-token': token
+        'x-token': this.token
       }
     }).pipe(
-      tap((resp: any) => {
+      map((resp: any) => {
+
+        const { nombre, email, role, google, img = '', uid } = resp.usuario;
+        this.usuario = new Usuario(nombre, email, '', img, google, role, uid);
+        // this.usuario.imprimirUsuario(nombre);
         localStorage.setItem('token', resp.token);
+        return true;
       }),
-      map(resp => true),
       catchError(error => of(false))
     )
   }
@@ -44,6 +58,24 @@ export class UsuarioService {
           localStorage.setItem('token', resp.token)
         })
       )
+  }
+
+  actualizarUsuario(data: { email: string, nombre: string, role: string, password: string }) {
+
+    data = {
+      ...data,
+      role: this.usuario.role || 'USER_ROLE',
+      password: '123456',
+    }
+
+    console.log(data, this.uid);
+
+    return this.httpclient.put(`${base_url}/usuarios/${this.uid}`, data, {
+      headers: {
+        'x-token': this.token
+      }
+    })
+
   }
 
   login(formData: LoginForm) {
@@ -69,8 +101,10 @@ export class UsuarioService {
 
     localStorage.removeItem('token');
 
-    google.accounts.id.revoke('systemsusanoo@gmail.com', () => {
-      this.router.navigateByUrl('/login');
-    })
+    // google.accounts.id.revoke('systemsusanoo@gmail.com', () => {
+    this.router.navigateByUrl('/login');
+    // })
   }
+
+
 }

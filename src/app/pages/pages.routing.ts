@@ -11,6 +11,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromisesComponent } from './promises/promises.component';
 import { RkjsComponent } from './rkjs/rkjs.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 const routes: Routes = [
@@ -21,10 +22,11 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent, data: { titulo: 'DashBoard' } },
       { path: 'grafica1', component: Grafica1Component, data: { titulo: 'Grafica' } },
+      { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfiles' } },
       { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress' } },
       { path: 'promises', component: PromisesComponent, data: { titulo: 'Promesas' } },
-      { path: 'settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes' } },
       { path: 'rxjs', component: RkjsComponent, data: { titulo: 'RxJs' } },
+      { path: 'settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes' } },
 
     ]
   },
