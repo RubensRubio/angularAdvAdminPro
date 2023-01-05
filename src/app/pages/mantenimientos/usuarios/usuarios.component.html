@@ -1,0 +1,85 @@
+<div class="row animated fadeIn fast" *ngIf="!isLoading">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #txtBuscar type="text" class="form-control" (keyup)="buscar(txtBuscar.value)"
+                    placeholder="Buscar usuario" />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row animated fadeIn fast" *ngIf="!isLoading">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Usuarios</h4>
+                <h6 class="card-subtitle">
+                    Total de usuarios registrados en la aplicación {{ totalUsuarios }}
+                </h6>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="w100">Avatar</th>
+                                <th>Correo</th>
+                                <th>Nombre</th>
+                                <th class="w150">Role</th>
+                                <th class="w100">Auth</th>
+                                <th class="text-nowrap w100">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let usuario of usuarios">
+                                <td class="text-center">
+                                    <img src="{{usuario.imagenUrl}}" alt="Avatar de usuario" class="avatar cursor" (click)="cambiarImagen(usuario)"
+                                        referrerpolicy="no-referrer" />
+                                </td>
+                                <td>{{usuario.email}}</td>
+                                <td>{{usuario.nombre}}</td>
+                                <td>
+                                    <select class="form-control" [(ngModel)]="usuario.role" (change)="cambiarRol(usuario)">
+                                        <option value="ADMIN_ROLE">Administrador</option>
+                                        <option value="USER_ROLE">Usuario</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <span *ngIf="usuario.google" class="label label-danger">Google</span>
+                                    <span *ngIf="!usuario.google" class="label label-info">Normal</span>
+                                </td>
+
+                                <td class="text-nowrap text-center">
+                                    <a data-toggle="tooltip" data-original-title="Borrar" class="cursor"
+                                        (click)="borrarUsuario(usuario)">
+                                        <i class="fa fa-close text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div *ngIf="noPagination">
+                    <button class="btn tbn-secondary" (click)="cambiarPagina(-5)">Anterior</button>
+                    &nbsp;
+                    <button class="btn tbn-secondary" (click)="cambiarPagina(5)">Siguiente</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

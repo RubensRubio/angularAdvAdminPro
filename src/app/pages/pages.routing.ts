@@ -12,6 +12,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromisesComponent } from './promises/promises.component';
 import { RkjsComponent } from './rkjs/rkjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,13 @@ const routes: Routes = [
       { path: 'promises', component: PromisesComponent, data: { titulo: 'Promesas' } },
       { path: 'rxjs', component: RkjsComponent, data: { titulo: 'RxJs' } },
       { path: 'settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes' } },
+
+      //Mantenimientos
+
+      { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Usuarios' } },
+      // { path: 'settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes' } },
+      // { path: 'settings', component: AccountSettingsComponent, data: { titulo: 'Ajustes' } },
+
 
     ]
   },

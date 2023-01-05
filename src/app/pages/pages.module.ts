@@ -15,6 +15,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { PromisesComponent } from './promises/promises.component';
 import { RkjsComponent } from './rkjs/rkjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
 
 
@@ -28,6 +29,7 @@ import { PerfilComponent } from './perfil/perfil.component';
     PromisesComponent,
     RkjsComponent,
     PerfilComponent,
+    UsuariosComponent,
   ],
   exports:[
     DashboardComponent,
