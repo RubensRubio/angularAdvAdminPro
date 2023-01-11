@@ -48,10 +48,10 @@ export class ModalImagenComponent implements OnInit {
 
     this.fileUploadService.actualizarFoto(this.imagenUpload, tipo, id)
       .then(img => {
-        Swal.fire('OK', 'Imagen de usuario actualizada correctamente', 'success');
+        Swal.fire('OK', `Imagen de ${tipo} actualizada correctamente`, 'success');
         this.modalImagenService.nuevaImagen.emit(img);
         this.cerrarModal();
-      }).catch(err => Swal.fire('Error al actualizar la imagen usuario', 'No se pudo subir la imagen', 'error'));
+      }).catch(err => Swal.fire(`Error al actualizar la imagen ${tipo}`, 'No se pudo subir la imagen', 'error'));
   }
 
 }
